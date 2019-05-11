@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Antagningsprov_DavidStåhl_8809080032
 {
@@ -8,9 +8,10 @@ namespace Antagningsprov_DavidStåhl_8809080032
         {
             Console.WriteLine("David Ståhl 2019-05-13");
             //Writes the creator and the date of creation.
-            Dices(Starts());
+            int numberOfDices = ChooseNumberOfDices();
+            Dices(numberOfDices);
             //Starts the Dice game by calling the Dice method, wich calling the Start method.
-            Exits();
+            ExitGame();
             //Calling the exit method, after the dice game ended to give the user a choice to play again
             // or end the application.
             Console.ReadLine();
@@ -44,7 +45,6 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 {
                     sumNumbers += randomNumber;      // add the rolled value to the sumNumbers
                 }
-
                 Console.WriteLine("Tryck enter för att slå nästa tärning"); // tell the user too 
                 Console.ReadLine();                                   //press enter to roll the dice again
             }
@@ -52,7 +52,7 @@ namespace Antagningsprov_DavidStåhl_8809080032
                                                                                 //the total value of the dices
             Console.WriteLine("Antal kastade tärningar: " + sumRolls + "st"); // total dices rolled           
         }
-        public static int Starts()  // starts the game method
+        public static int ChooseNumberOfDices()  // starts the game method
         {
             Console.Write("Välj antal tärningar, 1,2,3 eller 4 st: "); // let the user choice number of dices
             string theAnwserAsAString = Console.ReadLine(); // store the input from user
@@ -60,17 +60,16 @@ namespace Antagningsprov_DavidStåhl_8809080032
             if (int.TryParse(theAnwserAsAString, out int inputDices)) // check so the input is a int
             {
                 // check so the user did choose 1-4 dices.
-                if (inputDices == 1 || inputDices == 2 || inputDices == 3 || inputDices == 4)
+                if (inputDices > 0 && inputDices < 5)
                 {
                     return inputDices;    // returns the number of dices user did choose 
                 }
-
             }
             Console.WriteLine("fel, försök igen"); // tell the user it typed wrong
-            Starts(); // let the user Choose again from the start of the method.
+            ChooseNumberOfDices(); // let the user Choose again from the start of the method.
             return inputDices; // returns the number of dices from the start method.
         }
-        public static void Exits() // a method that let the user choose what to do after the game ends
+        public static void ExitGame() // a method that let the user choose what to do after the game ends
         {
             // let the user choose to start again or end the program by choosing number 1 or 2.
             Console.Write("För att spela igen skriv siffran 1, eller 2 för att avsluta programmet: ");
@@ -81,8 +80,8 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 if (anwser == 1) // if the user choosed 1 and to start the game again.
                 {
                     Console.Clear(); // clear the consol to ease the view.
-                    Dices(Starts()); // starts the game from beginning when calling this method
-                    Exits(); // so the user can choose to start the game one more time or end the program.
+                    Dices(ChooseNumberOfDices()); // starts the game from beginning when calling this method
+                    ExitGame(); // so the user can choose to start the game one more time or end the program.
                 }
                 else if (anwser == 2)
                 {
@@ -91,11 +90,11 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 else
                 {
                     Console.WriteLine("Fel siffra, försök igen"); // tell the user it dident use the right number
-                    Exits(); // let the user choose again to start the game again or end the consol.
+                    ExitGame(); // let the user choose again to start the game again or end the consol.
                 }
             }
             Console.WriteLine("ingen siffra, försök igen"); // tell the user it didnt write a int.
-            Exits(); // let the user choose again from the beginnig of the method.
+            ExitGame(); // let the user choose again from the beginnig of the method.
         }
 
     }
