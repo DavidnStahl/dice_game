@@ -6,8 +6,6 @@ namespace Antagningsprov_DavidStåhl_8809080032
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("David Ståhl 2019-05-13");
-            //Writes the creator and the date of creation.
             int numberOfDices = ChooseNumberOfDices();
             Dices(numberOfDices);
             //Starts the Dice game by calling the Dice method, wich calling the Start method.
@@ -54,6 +52,8 @@ namespace Antagningsprov_DavidStåhl_8809080032
         }
         public static int ChooseNumberOfDices()  // starts the game method
         {
+            Console.WriteLine("David Ståhl 2019-05-13");
+            //Writes the creator and the date of creation.
             Console.Write("Välj antal tärningar, 1,2,3 eller 4 st: "); // let the user choice number of dices
             string theAnwserAsAString = Console.ReadLine(); // store the input from user
 
