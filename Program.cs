@@ -7,14 +7,14 @@ namespace Antagningsprov_DavidStåhl_8809080032
         static void Main(string[] args)
         {
             int numberOfDices = ChooseNumberOfDices();
-            Dices(numberOfDices);
-            //Starts the Dice game by calling the Dice method, wich calling the Start method.
+            RollDice(numberOfDices);
+            //Starts the Dice game by calling the RollDice method, wich calling the ChooseNumberOfDices method.
             ExitGame();
-            //Calling the exit method, after the dice game ended to give the user a choice to play again
+            //Calling the ExitGame method, after the dice game ended to give the user a choice to play again
             // or end the application.
             Console.ReadLine();
         }
-        public static void Dices(int dices) // The dice method takes the input of how many dices to play
+        public static void RollDice(int dices) // The dice method takes the input of how many dices to play
         {
             int sumRolls = 0; // how many dices(randomnumbers) is looped.
             int sumNumbers = 0; // the sum of numbers from the randomnumbers. without the number 6.
@@ -67,7 +67,7 @@ namespace Antagningsprov_DavidStåhl_8809080032
             }
             Console.WriteLine("fel, försök igen"); // tell the user it typed wrong
             ChooseNumberOfDices(); // let the user Choose again from the start of the method.
-            return inputDices; // returns the number of dices from the start method.
+            return inputDices; // returns the number of dices from the ChooseNumberOfDices method.
         }
         public static void ExitGame() // a method that let the user choose what to do after the game ends
         {
@@ -80,7 +80,7 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 if (anwser == 1) // if the user choosed 1 and to start the game again.
                 {
                     Console.Clear(); // clear the consol to ease the view.
-                    Dices(ChooseNumberOfDices()); // starts the game from beginning when calling this method
+                    RollDice(ChooseNumberOfDices()); // starts the game from beginning when calling this method
                     ExitGame(); // so the user can choose to start the game one more time or end the program.
                 }
                 else if (anwser == 2)
