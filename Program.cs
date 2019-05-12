@@ -6,96 +6,98 @@ namespace Antagningsprov_DavidStåhl_8809080032
     {
         static void Main(string[] args)
         {
-            int numberOfDices = ChooseNumberOfDices();
-            RollDice(numberOfDices);
-            //Starts the Dice game by calling the RollDice method, wich calling the ChooseNumberOfDices method.
-            ExitGame();
-            //Calling the ExitGame method, after the dice game ended to give the user a choice to play again
-            // or end the application.
+            Console.WriteLine("David Ståhl 2019-05-13"); // Writes the creator and the date of creation.                                                              
+            ChooseNumberOfDices(); // starts the game when calling this method
             Console.ReadLine();
         }
-        public static void RollDice(int dices) // The dice method takes the input of how many dices to play
+        public static void RollDice(int dices) // The dice method takes the input of how many dices to play.
         {
-            int sumRolls = 0; // how many dices(randomnumbers) is looped.
-            int sumNumbers = 0; // the sum of numbers from the randomnumbers. without the number 6.
-            int bonusRolls = 0; // a variable to track the bonus rolls if the randomnumber rolls 6
+            int sumRolls = 0; // How many dices(randomnumbers) is looped.
+            int sumNumbers = 0; // The sum of numbers from the randomnumbers. without the number 6.
+            int bonusRolls = 0; // A variable to track the bonus rolls if the randomnumber rolls 6.
 
-            for (int i = 0; i < dices; i++) // a loop with variable i as the number of dices rolled
+            for (int i = 0; i < dices; i++) // A loop with variable i as the number of dices rolled.
             {
-                Random random = new Random(); // creating a random method
-                int randomNumber = random.Next(1, 7); // gives randomNumber, the randomnumber from 1-6
-                sumRolls = i + 1; // adds +1 every loop of how many dices rolled 
-                Console.WriteLine("Totalt kastade tärningar: " + sumRolls + "\nVärdet på tärningen = "
-                   + randomNumber); // tell the user number of rolled dices, the value of the roll
-                if (randomNumber == 6) // if randomNumber is 6 do something
+                Random random = new Random(); // Creating a random method.
+                int randomNumber = random.Next(1, 7); // Gives randomNumber, the random number from 1-6.
+                sumRolls = i + 1; // Adds +1 every loop of how many dices rolled .
+                Console.WriteLine("Totalt kastade tärningar: " + sumRolls + // Tell the user number of rolled dices,
+                                 "\nVärdet på tärningen = " + randomNumber); // the value of the roll.
+                if (randomNumber == 6) // If the random number is six do something.
                 {
-                    dices += 2; // adds 2 extra dices to roll if the randomnumer is 6.
-                    bonusRolls += 1;  // adds bonus rolls to keep the sumNumbers from adding the 6.
-                    Console.WriteLine("Tärningen visade en 6a vilket" +
-                        " betyder att du får två extra kast!"); // berättar att användaren fått två nya kast..
-                }
-                else if (bonusRolls > 0) // if there is bonusrolls from getting a 6, do those rolls
-                {                           // before the next dice
-                    bonusRolls--;            // after each bonusroll give bonusroll -1 each loop
-                    sumNumbers += randomNumber;    // sum the the rolls randomnumbers
-                }                                    // as long its not a 6.
+                    dices += 2; // Adds two extra dices to roll if the random number is six.
+                    bonusRolls += 1;  // Adds bonus rolls to keep the sumNumbers from adding the six.
+                    Console.WriteLine("Tärningen visade en sexa, vilket" + 
+                                      " betyder att du får två extra tärningar!"); // Tell the user it got two extra dices
+                }                                                                     // to throw, because the dice rolled a six.                                                    
+                else if (bonusRolls > 0) // If there is bonusrolls from getting a six, do those rolls
+                {                         // Before the next dice.
+                    bonusRolls--;            // After each bonusroll give bonusroll -1 each loop.
+                    sumNumbers += randomNumber;    // Add the the randomnumbers to total sum
+                }                                    // as long its not a six.
                 else
                 {
-                    sumNumbers += randomNumber;      // add the rolled value to the sumNumbers
+                    sumNumbers += randomNumber;      // Add the rolled value to the sumNumbers
                 }
-                Console.WriteLine("Tryck enter för att slå nästa tärning"); // tell the user too 
-                Console.ReadLine();                                   //press enter to roll the dice again
-            }
-            Console.WriteLine("Totalasumman av alla tärningar: " + sumNumbers); // Write the end result of
-                                                                                //the total value of the dices
-            Console.WriteLine("Antal kastade tärningar: " + sumRolls + "st"); // total dices rolled           
-        }
-        public static int ChooseNumberOfDices()  // starts the game method
-        {
-            Console.WriteLine("David Ståhl 2019-05-13");
-            //Writes the creator and the date of creation.
-            Console.Write("Välj antal tärningar, 1,2,3 eller 4 st: "); // let the user choice number of dices
-            string theAnwserAsAString = Console.ReadLine(); // store the input from user
 
-            if (int.TryParse(theAnwserAsAString, out int inputDices)) // check so the input is a int
-            {
-                // check so the user did choose 1-4 dices.
-                if (inputDices > 0 && inputDices < 5)
-                {
-                    return inputDices;    // returns the number of dices user did choose 
-                }
+                Console.WriteLine("Tryck enter för att slå nästa tärning");
+                Console.ReadLine();  // press enter to roll the next dice.                                                   
             }
-            Console.WriteLine("fel, försök igen"); // tell the user it typed wrong
-            ChooseNumberOfDices(); // let the user Choose again from the start of the method.
-            return inputDices; // returns the number of dices from the ChooseNumberOfDices method.
+            
+            Console.WriteLine("Totalsumman av alla tärningar: " + sumNumbers); // Write the end result of
+                                                                                // the total value of the dice,
+                                                                                // without the dice that gave a six.
+            Console.WriteLine("Antal kastade tärningar: " + sumRolls + "st"); // Write the total dices rolled.
+            ExitGame();
         }
-        public static void ExitGame() // a method that let the user choose what to do after the game ends
+        public static void ChooseNumberOfDices()  // The method that lets the user choose number of dices.
         {
-            // let the user choose to start again or end the program by choosing number 1 or 2.
-            Console.Write("För att spela igen skriv siffran 1, eller 2 för att avsluta programmet: ");
-            string theAnwserAsAString = Console.ReadLine(); // store the input
+            Console.Write("Välj antal tärningar, 1,2,3 eller 4 st: "); // let the user choose number of dices.
+            string theAnwserAsAString = Console.ReadLine(); // Store the input from user.
 
-            if (int.TryParse(theAnwserAsAString, out int anwser)) // check so the input is a int
+            if (int.TryParse(theAnwserAsAString, out int inputDices)) // Check so the input is a number.
             {
-                if (anwser == 1) // if the user choosed 1 and to start the game again.
+                if (inputDices >= 1 && inputDices <= 4) // Check so the user did choose 1-4 dices.
                 {
-                    Console.Clear(); // clear the consol to ease the view.
-                    RollDice(ChooseNumberOfDices()); // starts the game from beginning when calling this method
-                    ExitGame(); // so the user can choose to start the game one more time or end the program.
-                }
-                else if (anwser == 2)
-                {
-                    System.Environment.Exit(0); // if input was 2 the program will end here.
-                }
+                    Console.WriteLine("För att kasta första tärningen, tryck enter"); // Press enter to start the game         
+                    Console.ReadLine();  // Pause the program so user can start the game with pressing enter.
+                    RollDice(inputDices);   //Starts the rollDice method, with inputDices as parameter.
+                }                           
                 else
                 {
-                    Console.WriteLine("Fel siffra, försök igen"); // tell the user it dident use the right number
-                    ExitGame(); // let the user choose again to start the game again or end the consol.
+                    Console.WriteLine("fel antal tärningar, försök igen"); // Tell the user it typed wrong number of dices.
+                    ChooseNumberOfDices(); // A recursive method , so the user can choose dices again.
                 }
-            }
-            Console.WriteLine("ingen siffra, försök igen"); // tell the user it didnt write a int.
-            ExitGame(); // let the user choose again from the beginnig of the method.
+            }            
+            Console.WriteLine("fel inmatning, försök igen"); // Tell the user it typed wrong input.
+            ChooseNumberOfDices(); // A recursive method , so the user can choose dices again. 
         }
+        public static void ExitGame() // A method that let the user choose what to do after the game ends
+        {           
+            Console.Write("För att spela igen skriv siffran 1," +  // let the user choose to start again or end
+                         " eller 2 för att avsluta programmet: "); // the program by choosing number 1 or 2.
+            string theAnwserAsAString = Console.ReadLine(); // Store the input
+
+            if (int.TryParse(theAnwserAsAString, out int anwser)) // Check so the input is a number
+            {
+                if (anwser == 1) // If the user choosed number one do this.
+                {
+                    Console.Clear(); // Clear the consol to ease the view.
+                    ChooseNumberOfDices(); // Starts the game from the beginning, when calling this method            
+                }
+                else if (anwser == 2)  // If the user choosed number two, do this.
+                {
+                    System.Environment.Exit(0); // If the input was number two, the program will end here.
+                }
+                else    // If user did write a number, but not number one or two.
+                {
+                    Console.WriteLine("Fel siffra, försök igen"); // Tell the user it didn't use a correct number
+                    ExitGame(); // A recursive method, so the user can choose again to start the game,                             
+                }               // again or end the program.
+            }
+            Console.WriteLine("Fel inmatning, försök igen"); // Tell the user it didn't write a number.
+            ExitGame();   // A recursive method, so the user can choose again to start the game, 
+        }                 // again or end the program.
 
     }
 }
