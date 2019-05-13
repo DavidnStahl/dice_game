@@ -26,15 +26,17 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 if (randomNumber == 6) // If the random number is six do something.
                 {
                     dices += 2; // Adds two extra dices to roll if the random number is six.
-                    bonusRolls += 1;  // Adds bonus rolls to keep the sumNumbers from adding the six.
+                    bonusRolls += 2;  // Adds bonus rolls to keep the sumNumbers from adding the six.
                     Console.WriteLine("Tärningen visade en sexa, vilket" +
                                       " betyder att du får två extra tärningar!"); // Tell the user it got two extra dices
-                }                                                                     // to throw, because the dice rolled a six.                                                    
+                    Console.WriteLine("Antal extra tärningar kvar: " + bonusRolls);
+                }                                                           // to throw, because the dice rolled a six.                                                    
                 else if (bonusRolls > 0) // If there is bonusrolls from getting a six, do those rolls
                 {                         // Before the next dice.
                     bonusRolls--;            // After each bonusroll give bonusroll -1 each loop.
                     sumNumbers += randomNumber;    // Add the the randomnumbers to total sum
-                }                                    // as long its not a six.
+                    Console.WriteLine("Antal extra tärningar kvar: " + bonusRolls);  
+                }                       
                 else
                 {
                     sumNumbers += randomNumber;      // Add the rolled value to the sumNumbers
