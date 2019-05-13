@@ -2,7 +2,7 @@ using System;
 
 namespace Antagningsprov_DavidStåhl_8809080032
 {
-    class Programs
+    class DiceGame
     {
         static void Main(string[] args)
         {
@@ -10,6 +10,7 @@ namespace Antagningsprov_DavidStåhl_8809080032
             ChooseNumberOfDices(); // Starts the game when calling this method
             Console.ReadLine();
         }
+
         public static void RollDice(int dices) // The dice method takes the input of how many dices to play.
         {
             int sumRolls = 0; // How many dices(randomnumbers) is looped.
@@ -23,30 +24,35 @@ namespace Antagningsprov_DavidStåhl_8809080032
                 sumRolls = i + 1; // Adds +1 every loop of how many dices rolled .
                 Console.WriteLine("Totalt kastade tärningar: " + sumRolls + // Tell the user number of rolled dices,
                                  "\nVärdet på tärningen = " + randomNumber); // the value of the roll.
+
+                if (bonusRolls > 0) // If there is bonusrolls from getting a six, do those rolls
+                {                         // Before the next dice.
+                    bonusRolls--;            // After each bonusroll give bonusroll -1 each loop.
+                    Console.WriteLine("Detta var en extra tärning"); // Tell user that the dice it rolls, is a extra dice.
+                }
+
                 if (randomNumber == 6) // If the random number is six do something.
                 {
                     dices += 2; // Adds two extra dices to roll if the random number is six.
                     bonusRolls += 2;  // Adds bonus rolls to keep the sumNumbers from adding the six.
                     Console.WriteLine("Tärningen visade en sexa, vilket" +
                                       " betyder att du får två extra tärningar!"); // Tell the user it got two extra dices
-                    Console.WriteLine("Antal extra tärningar kvar: " + bonusRolls);
-                }                                                           // to throw, because the dice rolled a six.                                                    
-                else if (bonusRolls > 0) // If there is bonusrolls from getting a six, do those rolls
-                {                         // Before the next dice.
-                    bonusRolls--;            // After each bonusroll give bonusroll -1 each loop.
-                    sumNumbers += randomNumber;    // Add the the randomnumbers to total sum
-                    Console.WriteLine("Antal extra tärningar kvar: " + bonusRolls);  
-                }                       
+                }                                                                     // to throw, because the dice rolled a six.                                                    
                 else
                 {
                     sumNumbers += randomNumber;      // Add the rolled value to the sumNumbers
-                }               
+                }
+
+                if (i + 1 == dices)  // End the loop when last Dice is rolled, so the "Slut på tärningar" is writen 
+                {                   // instead of "Slå nästa tärning".
+                    break;
+                }
+
                 Console.WriteLine("Tryck enter för slå nästa tärning");
                 Console.ReadLine();  // press enter to roll the next dice.
 
-
             }
-            Console.WriteLine("Slut på tärningar, för att se resultat tryck enter");
+            Console.WriteLine("Slut på tärningar, för att se resultat tryck enter"); // Tell the user, zero dices left to roll.
             Console.ReadLine();  // press enter to se the result.
             Console.WriteLine("Totalsumman av alla tärningar: " + sumNumbers); // Write the end result of
                                                                                // the total value of the dice,
@@ -58,7 +64,6 @@ namespace Antagningsprov_DavidStåhl_8809080032
         {
             Console.Write("Välj antal tärningar, 1,2,3 eller 4 st: "); // let the user choose number of dices.
             string theAnwserAsAString = Console.ReadLine(); // Store the input from user.
-
             if (int.TryParse(theAnwserAsAString, out int inputDices)) // Check so the input is a number.
             {
                 if (inputDices >= 1 && inputDices <= 4) // Check so the user did choose 1-4 dices.
@@ -99,9 +104,9 @@ namespace Antagningsprov_DavidStåhl_8809080032
                     ExitGame(); // A recursive method, so the user can choose again to start the game,                             
                 }               // again or end the program.
             }
+
             Console.WriteLine("Fel inmatning, försök igen"); // Tell the user it didn't write a number.
             ExitGame();   // A recursive method, so the user can choose again to start the game, 
-        }                 // again or end the program.
-
+        }                 // or end the program.
     }
 }
